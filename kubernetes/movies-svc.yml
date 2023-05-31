@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: movies-svc
+  labels:
+    app: movies
+spec:
+  type: LoadBalancer
+  selector:
+    app: movies
+  ports:
+    - port: 80
+      targetPort: 3000
