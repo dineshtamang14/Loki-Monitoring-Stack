@@ -2,7 +2,8 @@ resource "helm_release" "loki_stack" {
   name       = "loki-stack-${local.env}"
   repository = "https://grafana.github.io/helm-charts"
   chart      = "loki-stack"
-
+  namespace        = "monitoring"
+  create_namespace = true
   # To set the all configurations for the helm chart
   set {
     name  = "loki.enabled"
