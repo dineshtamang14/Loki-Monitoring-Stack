@@ -4,6 +4,7 @@ metadata:
   name: movies
   labels:
     app: movies
+  namespace: prod
 spec:
   replicas: 2
   selector:

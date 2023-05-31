@@ -1,14 +1,35 @@
-resource "helm_release" "loki" {
-  name       = "loki-${local.env}"
-  repository = "https://grafana.github.io/loki/charts"
+resource "helm_release" "loki_stack" {
+  name       = "loki-stack-${local.env}"
+  repository = "https://grafana.github.io/helm-charts"
   chart      = "loki-stack"
-  version    = "2.5.0"
-}
 
-resource "helm_release" "promtail" {
-  depends_on = [ helm_release.loki ]
-  name       = "promtail-${local.env}"
-  repository = "https://grafana.github.io/loki/charts"
-  chart      = "promtail"
-  version    = "2.5.0"
+  # To set the all configurations for the helm chart
+  set {
+    name  = "loki.enabled"
+    value = "true"
+  }
+
+  set {
+    name  = "loki.persistence.enabled"
+    value = "true"
+  }
+  set {
+    name  = "loki.persistence.size"
+    value = "1Gi"
+  }
+
+  set {
+    name  = "promtail.enabled"
+    value = "true"
+  }
+
+  set {
+    name  = "grafana.enabled"
+    value = "true"
+  }
+
+  set {
+    name = "prometheus.enabled"
+    value = "true"
+  }
 }

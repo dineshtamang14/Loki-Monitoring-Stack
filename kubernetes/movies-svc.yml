@@ -4,6 +4,7 @@ metadata:
   name: movies-svc
   labels:
     app: movies
+  namespace: prod
 spec:
   type: LoadBalancer
   selector:
